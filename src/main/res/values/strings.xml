@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">RemindMe v.1.0.0</string>
+
+    <string-array name="colors">
+        <item>Default (Grey)</item>
+        <item>Black</item>
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Red</item>
+        <item>Purple</item>
+        <item>Pink</item>
+        <item>Orange</item>
+        <item>Sky Blue</item>
+    </string-array>
+    <string name="Login" translatable="false">Login:</string>
+    <string name="Password">"Pass:  "</string>
+    <string name="Title">Title:</string>
+    <string name="Confirm">Confirm</string>
+    <string name="Back">Back</string>
+    <string name="Color">Color:</string>
+    <string name="Note">Note</string>
+    <string name="creds">Add credentials!</string>
+    <string name="arys">Do you want to delete item?</string>
+    <string name="Note2">Note:</string>
+    <string name="empty" translatable="false">...</string>
+    <string name="Unable">Unable to edit this field! (You must select checkbox in item creation.)</string>
+    <string name="edcreds">Edit credentials!</string>
+    <string name="FAQ">Everything in README!!!</string>
+    <string name="setpass">Set your password!</string>
+    <string name="logpass">Log in with your password!</string>
+</resources>

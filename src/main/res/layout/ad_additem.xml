@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="@string/creds"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/titlead"/>
+
+
+    <LinearLayout
+        android:id="@+id/checkholder"
+        android:layout_width="match_parent"
+        android:layout_below="@id/titlead"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/pin"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="PIN"/>
+
+        <CheckBox
+            android:id="@+id/note"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/Note"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/displaytitle"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:textSize="32dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/inputlogin"
+        android:layout_below="@id/checkholder"
+        android:textStyle="bold"
+        android:text="@string/Title"/>
+
+    <EditText
+        android:id="@+id/inputtitle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/displaylogin"
+        android:textSize="20dp"
+        android:layout_below="@id/checkholder"/>
+
+    <TextView
+        android:id="@+id/displaylogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/inputlogin"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:textSize="32dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        android:layout_below="@id/displaytitle"
+        android:textStyle="bold"
+        android:text="@string/Login"/>
+
+    <EditText
+        android:id="@+id/inputlogin"
+        android:layout_width="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/displaypass"
+        android:textSize="20dp"
+        android:layout_below="@id/inputtitle"/>
+
+    <TextView
+        android:id="@+id/displaypass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="10dp"
+        android:textSize="33dp"
+        android:layout_below="@id/displaylogin"
+        android:textStyle="bold"
+        android:text="@string/Password"/>
+
+    <EditText
+        android:id="@+id/inputpass"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/displaylogin"
+        android:inputType="textPassword"
+        android:textSize="20dp"
+        android:layout_below="@id/displaylogin" />
+
+
+
+    <LinearLayout
+        android:id="@+id/buttonholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/inputpass"
+        android:layout_centerInParent="true">
+
+
+        <Button
+            android:id="@+id/cancelbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#E35E5E"
+            android:layout_marginRight="40dp"
+            android:textStyle="bold"
+            android:text="@string/Back"/>
+
+        <Button
+            android:id="@+id/addbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#52DD39"
+            android:textStyle="bold"
+            android:text="@string/Confirm"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

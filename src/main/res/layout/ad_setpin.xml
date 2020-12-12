@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="PIN: "
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:id="@+id/here1"
+        android:textSize="35dp"/>
+
+    <EditText
+        android:layout_width="150dp"
+        android:inputType="number"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/here1"
+        android:textSize="30dp"
+        android:id="@+id/insertPIN"
+        android:hint="PIN"/>
+
+    <Button
+        android:id="@+id/confirmpinbutton"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/insertPIN"
+        android:padding="8dp"
+        android:backgroundTint="#52DD39"
+        android:textStyle="bold"
+        android:text="@string/Confirm"/>
+
+    <Button
+        android:id="@+id/backpinbutton"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/insertPIN"
+        android:padding="8dp"
+        android:backgroundTint="#E35E5E"
+        android:textStyle="bold"
+        android:text="@string/Back"/>
+
+</RelativeLayout>

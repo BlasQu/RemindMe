@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_edit_24"
+        android:id="@+id/editpin"
+        android:focusable="true"
+        android:clickable="true"
+        android:padding="4dp"
+        app:tint="@color/black"/>
+
+    <TextView
+        android:id="@+id/displaypin"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/herepin"
+        android:textSize="33dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="PIN:"/>
+
+    <TextView
+        android:id="@+id/herepin"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/displaynote"
+        android:textSize="33dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        android:text="@string/empty"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_edit_24"
+        android:layout_below="@id/herepin"
+        android:id="@+id/editnote2"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="4dp"
+        app:tint="@color/black"/>
+
+    <TextView
+        android:id="@+id/displaynote"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/herepin"
+        android:layout_toRightOf="@id/editnote2"
+        android:textSize="33dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="@string/Note2"/>
+
+    <TextView
+        android:id="@+id/herenote"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/displaynote"
+        android:layout_below="@id/herepin"
+        android:textSize="33dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        android:text="@string/empty"/>
+
+
+        <Button
+            android:id="@+id/cancelpinbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#E35E5E"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/herenote"
+            android:layout_alignParentRight="true"
+            android:textStyle="bold"
+            android:text="@string/Back"/>
+
+</RelativeLayout>

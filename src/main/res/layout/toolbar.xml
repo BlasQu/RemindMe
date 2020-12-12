@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbarholder"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.Toolbar
+    android:layout_width="match_parent"
+    android:id="@+id/toolbar"
+    android:background="#4d4dff"
+    android:layout_height="60dp"/>
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_toRightOf="@id/langholder"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="7dp"
+            android:id="@+id/search"/>
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:visibility="visible"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        android:id="@+id/langholder"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="48dp"
+            android:id="@+id/changelang"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/englando390x260"/>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

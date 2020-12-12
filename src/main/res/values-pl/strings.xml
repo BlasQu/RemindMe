@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RemindMe v.1.0.0</string>
+    <string name="Password">"Hasło: "</string>
+    <string name="Title">"Tytuł: "</string>
+    <string name="Confirm">Zatwierdź</string>
+    <string name="Back">Wróć</string>
+    <string name="Color">"Kolor: "</string>
+    <string name="Note">Notatka</string>
+    <string name="creds">Dodaj dane!</string>
+    <string name="arys">Czy chcesz usunąć notatkę?</string>
+
+    <string-array name="colors">
+        <item>Domyślny (Szary)</item>
+        <item>Czarny</item>
+        <item>Niebieski</item>
+        <item>Zielony</item>
+        <item>Czerwony</item>
+        <item>Fioletowy</item>
+        <item>Różowy</item>
+        <item>Pomarańczowy</item>
+        <item>Błękitny</item>
+    </string-array>
+    <string name="Note2">Notka:</string>
+    <string name="Unable">Nie możesz edytować tego pola. (Musisz to zaznaczyć w tworzeniu pola.)</string>
+    <string name="edcreds">Zedytuj dane!</string>
+    <string name="FAQ">Wszystko w pliku README!!!</string>
+    <string name="setpass">Ustaw hasło!</string>
+    <string name="logpass">Zaloguj się poprzez hasło!</string>
+
+</resources>
