@@ -17,11 +17,7 @@ class CredsVM(app: Application) : AndroidViewModel(app) {
         val credsDao = CredsDatabase.createDB(app).getDao()
         repo = CredsRepo(credsDao)
         readCreds = Transformations.switchMap(searchString){
-            if (TextUtils.isEmpty(it)){
-                repo.readCreds
-            } else {
-                repo.searchCreds(it)
-            }
+            repo.searchCreds(it)
         }
     }
 
