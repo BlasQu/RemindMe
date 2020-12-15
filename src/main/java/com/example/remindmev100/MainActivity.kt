@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
         rvview.layoutManager = LinearLayoutManager(this)
         val adapter = RecyclerAdapter()
         rvview.adapter = adapter
+
         val vmp = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(CredsVM::class.java)
-        vmp.setSearch("")
         vmp.readCreds.observe(this, Observer {
             adapter.credsList = it
             adapter.notifyDataSetChanged()
