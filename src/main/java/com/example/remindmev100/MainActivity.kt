@@ -74,7 +74,6 @@ class MainActivity : AppCompatActivity() {
         val vmp = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(CredsVM::class.java)
         vmp.readCreds.observe(this, Observer {
             adapter.submitData(it)
-            adapter.notifyDataSetChanged()
         })
 
         search.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
