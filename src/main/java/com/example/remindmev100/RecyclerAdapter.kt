@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.postOnAnimationDelayed
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.remindmev100.room.Creds
 import kotlinx.android.synthetic.main.rv_item.view.*
@@ -16,7 +17,7 @@ import java.util.logging.Handler
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
 
-    var credsList : List<Creds> = emptyList<Creds>()
+    var credsList = mutableListOf<Creds>()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         init {
@@ -57,6 +58,25 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
         }
     }
 
+    class DiffCallback(val oldList: List<Creds>, val newList: List<Creds>) : DiffUtil.Callback(){
+        override fun getOldListSize(): Int {
+            return oldList.size
+        }
+
+        override fun getNewListSize(): Int {
+            return newList.size
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].id == newList[newItemPosition].id
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].login == newList[newItemPosition].login
+        }
+
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.rv_item, parent, false))
     }
@@ -71,6 +91,13 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
         holder.itemView.herepass.text = credsList[position].password
         holder.itemView.cardview.setCardBackgroundColor(getColor(holder.itemView.context, colorId(credsList[position].color)))
         holder.itemView.pinnote.visibility = pinnote(credsList[position].pin, credsList[position].note)
+    }
+
+    fun submitData(newList: List<Creds>){
+        val DiffResult = DiffUtil.calculateDiff(DiffCallback(credsList, newList))
+        credsList.clear()
+        credsList.addAll(newList)
+        DiffResult.dispatchUpdatesTo(this)
     }
 
     fun colorId(id : Int) : Int{

@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
         val vmp = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(CredsVM::class.java)
         vmp.readCreds.observe(this, Observer {
-            adapter.credsList = it
+            adapter.submitData(it)
             adapter.notifyDataSetChanged()
         })
 
