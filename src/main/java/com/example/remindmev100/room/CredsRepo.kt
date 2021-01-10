@@ -2,11 +2,17 @@ package com.example.remindmev100.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.flowOn
 
 
+@ExperimentalCoroutinesApi
 class CredsRepo(val credsDao: CredsDao) {
 
-    val readCreds : LiveData<List<Creds>> = credsDao.readCreds()
+    fun readCreds(str: String) : Flow<List<Creds>> = credsDao.readCreds(str).flowOn(Dispatchers.IO).conflate()
     fun searchCreds(search: String) : LiveData<List<Creds>> = credsDao.searchCreds(search)
 
     suspend fun addCreds(creds: Creds){

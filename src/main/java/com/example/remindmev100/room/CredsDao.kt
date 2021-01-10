@@ -2,6 +2,7 @@ package com.example.remindmev100.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CredsDao {
@@ -9,8 +10,8 @@ interface CredsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addCreds(creds: Creds)
 
-    @Query("SELECT * FROM creds_data")
-    fun readCreds() : LiveData<List<Creds>>
+    @Query("SELECT * FROM creds_data where creds_title LIKE '%' || :str || '%'")
+    fun readCreds(str: String) : Flow<List<Creds>>
 
     @Query("DELETE FROM creds_data where creds_id=:id")
     suspend fun deleteCreds(id: Int)

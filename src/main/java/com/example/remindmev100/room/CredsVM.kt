@@ -5,21 +5,25 @@ import android.text.TextUtils
 import android.widget.Toast
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
+@FlowPreview
+@ExperimentalCoroutinesApi
 class CredsVM(app: Application) : AndroidViewModel(app) {
 
-    val repo : CredsRepo
+    val randomString = ConflatedBroadcastChannel<Pair<String, Int>>(Pair("", 0))
+    val repo : CredsRepo = CredsRepo(CredsDatabase.createDB(app).getDao())
     var searchString = MutableLiveData<String>("")
-    var readCreds : LiveData<List<Creds>>
-
-    init {
-        val credsDao = CredsDatabase.createDB(app).getDao()
-        repo = CredsRepo(credsDao)
-        readCreds = Transformations.switchMap(searchString){
-            repo.searchCreds(it)
-        }
-    }
+    val readCreds : LiveData<List<Creds>> = randomString.asFlow().flatMapLatest { pair ->
+        repo.readCreds(pair.first)
+    }.asLiveData()
 
     fun setSearch(search: String){
         searchString.value = search

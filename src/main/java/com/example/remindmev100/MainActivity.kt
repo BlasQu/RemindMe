@@ -18,18 +18,37 @@ import android.view.MotionEvent
 import android.widget.SearchView
 import android.widget.Toast
 import android.widget.Toolbar
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.remindmev100.room.Creds
 import com.example.remindmev100.room.CredsVM
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.ad_setcolor.*
 import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import java.util.*
 
+@FlowPreview
+@ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var dataStore: DataStore<Preferences>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,13 +56,19 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        getlang()
+        dataStore = createDataStore("settings")
+
+        lifecycleScope.launch {
+            getlang()
+        }
         animatestuff()
         setVMAdapter()
 
         changelang.setOnClickListener {
-            changelang()
-            recreate()
+            lifecycleScope.launch {
+                changelang()
+                recreate()
+            }
         }
 
         floatingaddbutton.setOnClickListener {
@@ -76,13 +101,14 @@ class MainActivity : AppCompatActivity() {
             adapter.submitData(it)
         })
 
-        search.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+        search.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                vmp.setSearch(newText!!)
+                vmp.randomString.offer((Pair(newText!!, vmp.randomString.value.second)))
                 return false
             }
 
@@ -106,33 +132,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun changelang(){
-
-        val prefs = getSharedPreferences("creds_settings", Context.MODE_PRIVATE)
-        val editor = prefs.edit()
-
-        if (prefs.getString("creds_language", "english") == "english"){
-            editor.putString("creds_language", "polish")
-            editor.apply()
-            getlang()
-        } else {
-            editor.putString("creds_language", "english")
-            editor.apply()
-            getlang()
+    suspend fun changelang(){
+        val creds_language = preferencesKey<String>("creds_language")
+        lateinit var current_language : String
+        dataStore.edit {
+            current_language = dataStore.data.first()[creds_language] ?: "english"
+            if (current_language == "english") it[creds_language] = "polish"
+            else it[creds_language] = "english"
         }
+        getlang()
     }
 
-    fun getlang(){
+    suspend fun getlang(){
 
-        lateinit var flag : String
-        val prefs = getSharedPreferences("creds_settings", Context.MODE_PRIVATE)
+        val creds_language = preferencesKey<String>("creds_language")
+        var language : String = dataStore.data.first()[creds_language] ?: "english"
 
-        if (prefs.getString("creds_language", "english") == "english"){
+
+        val flag = if (language == "english"){
             changelang.setImageResource(R.drawable.englando390x260)
-            flag = "en"
+            "en"
         } else {
             changelang.setImageResource(R.drawable.polando390x260)
-            flag = "pl"
+            "pl"
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
