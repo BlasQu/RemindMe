@@ -33,14 +33,11 @@ import com.example.remindmev100.room.CredsVM
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.ad_setcolor.*
 import kotlinx.android.synthetic.main.toolbar.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import java.util.*
 
 @FlowPreview
@@ -58,14 +55,14 @@ class MainActivity : AppCompatActivity() {
 
         dataStore = createDataStore("settings")
 
-        lifecycleScope.launch {
+        runBlocking {
             getlang()
         }
         animatestuff()
         setVMAdapter()
 
         changelang.setOnClickListener {
-            lifecycleScope.launch {
+            lifecycleScope.launch(Dispatchers.Main) {
                 changelang()
                 recreate()
             }
